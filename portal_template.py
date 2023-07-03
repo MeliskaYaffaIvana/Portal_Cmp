@@ -35,7 +35,7 @@ for result in results:
     response = requests.post(url, json=payload)
 
     # Mengecek respon dari server
-     if response.status_code == 200:
+    if response.status_code == 200:
         print(f"Image created for {nama_template} - {link_template} successfully.")
 
         # Mengubah status_job menjadi 1 di database setelah images berhasil dibuat
