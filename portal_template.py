@@ -30,7 +30,7 @@ for result in results:
         'link_template': link_template,
         'versi': versi,
     }
-
+    print(payload)
     # Mengirim permintaan ke API server
     response = requests.post(url, json=payload)
 
