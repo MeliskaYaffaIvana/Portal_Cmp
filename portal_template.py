@@ -20,9 +20,6 @@ for result in results:
 
     # URL API server
     url = "http://10.0.0.21:8000/api/create_template/"
-
-    # #ubah nama tempalte menjadi lowercase
-    # nama_template = nama_template.lower()
     
     # Data inputan untuk membuat images
     payload = {
