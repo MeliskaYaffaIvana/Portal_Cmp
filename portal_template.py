@@ -16,7 +16,7 @@ cursor.execute(query)
 results = cursor.fetchall()
 
 for result in results:
-    id_template, nama_template, link_template = result
+    nama_template, link_template = result
 
     # URL API server
     url = "http://10.0.0.21:8000/api/create_template/"
