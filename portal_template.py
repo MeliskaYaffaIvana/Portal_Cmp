@@ -16,7 +16,7 @@ cursor.execute(query)
 results = cursor.fetchall()
 
 for result in results:
-    nama_template, link_template= result
+    id_template, nama_template, link_template = result
 
     # URL API server
     url = "http://10.0.0.21:8000/api/create_template/"
@@ -33,6 +33,13 @@ for result in results:
     # Mengecek respon dari server
     if response.status_code == 200:
         print(f"Image created for {nama_template} - {link_template} successfully.")
+
+        # Mengubah status_job menjadi 1 di database
+        update_query = "UPDATE template SET status_job = '1' WHERE id = %s"
+        cursor.execute(update_query, (id_template,))
+        conn.commit()
+
+        print(f"Status job updated for {nama_template}")
     else:
         print(f"Image creation for {nama_template} - {link_template} failed.")
 
