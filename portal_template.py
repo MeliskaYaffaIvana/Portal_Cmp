@@ -11,7 +11,7 @@ conn = mysql.connector.connect(
 cursor = conn.cursor()
 
 # Mendapatkan data inputan dari database
-query = "SELECT nama_template, link_template FROM template WHERE status = '0'"
+query = "SELECT nama_template, link_template FROM template WHERE status_job = '0'"
 cursor.execute(query)
 results = cursor.fetchall()
 
