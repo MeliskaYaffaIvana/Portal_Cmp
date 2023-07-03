@@ -16,14 +16,15 @@ cursor.execute(query)
 results = cursor.fetchall()
 
 for result in results:
+     # Mengubah nama_template menjadi lowercase
+    nama_template = nama_template.lower()
+
     nama_template, link_template = result
 
     # URL API server
     url = "http://10.0.0.21:8000/api/create_template/"
 
-    # Mengubah nama_template menjadi lowercase
-    nama_template = nama_template.lower()
-
+   
     # Data inputan untuk membuat images
     payload = {
         'nama_template': nama_template,
