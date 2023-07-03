@@ -11,12 +11,12 @@ conn = mysql.connector.connect(
 cursor = conn.cursor()
 
 # Mendapatkan data inputan dari database
-query = "SELECT nama_template, link_template FROM template WHERE status_job = '0'"
+query = "SELECT nama_template, link_template,versi FROM template WHERE status_job = '0'"
 cursor.execute(query)
 results = cursor.fetchall()
 
 for result in results:
-    nama_template, link_template = result
+    nama_template, link_template, versi = result
     print(nama_template)
     print(link_template)
 
@@ -28,6 +28,7 @@ for result in results:
     payload = {
         'nama_template': nama_template,
         'link_template': link_template,
+        'versi': versi,
     }
 
     # Mengirim permintaan ke API server
