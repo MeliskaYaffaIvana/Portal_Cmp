@@ -11,12 +11,12 @@ conn = mysql.connector.connect(
 cursor = conn.cursor()
 
 # Mendapatkan data inputan dari database
-query = "SELECT nama_template, link_template FROM template WHERE status_job = '0'"
+query = "SELECT id, nama_template, link_template FROM template WHERE status_job = '0'"
 cursor.execute(query)
 results = cursor.fetchall()
 
 for result in results:
-    nama_template, link_template = result
+    id, nama_template, link_template = result
 
     # URL API server
     url = "http://10.0.0.21:8000/api/create_template/"
@@ -36,7 +36,7 @@ for result in results:
 
         # Mengubah status_job menjadi 1 di database
         update_query = "UPDATE template SET status_job = '1' WHERE id = %s"
-        cursor.execute(update_query, (id_template,))
+        cursor.execute(update_query, (id,))
         conn.commit()
 
         print(f"Status job updated for {nama_template}")
