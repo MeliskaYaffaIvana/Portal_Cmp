@@ -17,8 +17,8 @@ results = cursor.fetchall()
 
 for result in results:
     nama_template, link_template, versi = result
-    print(nama_template)
-    print(link_template)
+    # print(nama_template)
+    # print(link_template)
 
     # URL API server
     url = "http://10.0.0.21:8000/api/create_template/"
@@ -30,7 +30,7 @@ for result in results:
         'link_template': link_template,
         'versi': versi,
     }
-    print(payload)
+
     # Mengirim permintaan ke API server
     response = requests.post(url, json=payload)
 
