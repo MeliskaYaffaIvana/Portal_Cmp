@@ -17,8 +17,6 @@ results = cursor.fetchall()
 
 for result in results:
     nama_template, link_template = result
-    # Mengubah nama_template menjadi lowercase
-    nama_template = nama_template.lower()
 
     # URL API server
     url = "http://10.0.0.21:8000/api/create_template/"
