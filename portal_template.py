@@ -1,7 +1,6 @@
 import requests
 import mysql.connector
-from datetime import datetime
-import pytz
+from datetime import datetime, timedelta
 
 # Koneksi ke database MySQL
 conn = mysql.connector.connect(
@@ -17,8 +16,8 @@ query = "SELECT nama_template, link_template,versi FROM template WHERE status_jo
 cursor.execute(query)
 results = cursor.fetchall()
 
-# Mengatur zona waktu Asia/Jakarta
-timezone = pytz.timezone('Asia/Jakarta')
+# Mendapatkan selisih waktu dengan UTC
+utc_offset = timedelta(hours=7)
 
 for result in results:
     nama_template, link_template, versi = result
@@ -46,9 +45,10 @@ for result in results:
         conn.commit()
 
         # Mengubah status_job menjadi 2 dan tgl_selesai menjadi waktu saat ini di zona waktu Asia/Jakarta
+        current_time = datetime.utcnow() + utc_offset
+        current_time_str = current_time.strftime('%Y-%m-%d %H:%M:%S')
         update_query = "UPDATE template SET status_job = 2, tgl_selesai = %s WHERE nama_template = %s"
-        current_time = datetime.now(timezone).strftime('%Y-%m-%d %H:%M:%S')
-        cursor.execute(update_query, (current_time, nama_template))
+        cursor.execute(update_query, (current_time_str, nama_template))
         conn.commit()
     else:
         print(f"Image creation for {nama_template} - {link_template} failed.")
