@@ -51,8 +51,8 @@ for result in results:
         cursor.execute(update_query, (current_time_str, nama_template))
         conn.commit()
 
-        # Mengubah atribut bolehkan menjadi 0 jika status_job sudah 2
-        update_query = "UPDATE template SET bolehkan = 0 WHERE status_job = 2"
+        # Mengubah atribut bolehkan menjadi 1 jika status_job sudah 2
+        update_query = "UPDATE template SET bolehkan = 1 WHERE status_job = 2"
         cursor.execute(update_query)
         conn.commit()
     else:
