@@ -41,7 +41,7 @@ for result in results:
         conn.commit()
 
         # Mengubah status_job menjadi 2 di database setelah server berhasil membuat template
-        update_query = "UPDATE template SET status_job = 2 WHERE nama_template = %s"
+        update_query = "UPDATE template SET status_job = 2, tgl_selesai = CURDATE() WHERE nama_template = %s"
         cursor.execute(update_query, (nama_template,))
         conn.commit()
     else:
@@ -55,6 +55,7 @@ for result in results:
 # Tutup koneksi database
 cursor.close()
 conn.close()
+
 
 
 # import requests
