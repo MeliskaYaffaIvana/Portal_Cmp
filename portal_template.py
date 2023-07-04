@@ -43,7 +43,7 @@ for result in results:
 
         # Mengubah status_job menjadi 2 dan tgl_selesai menjadi waktu saat ini di database setelah server berhasil membuat template
         update_query = "UPDATE template SET status_job = 2, tgl_selesai = %s WHERE nama_template = %s"
-        current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        current_time = datetime.now('Asia/Jakarta).strftime('%Y-%m-%d %H:%M:%S')
         cursor.execute(update_query, (current_time, nama_template))
         conn.commit()
     else:
