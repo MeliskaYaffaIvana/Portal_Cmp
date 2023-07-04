@@ -1,5 +1,6 @@
 import requests
 import mysql.connector
+from datetime import datetime
 
 # Koneksi ke database MySQL
 conn = mysql.connector.connect(
@@ -40,9 +41,10 @@ for result in results:
         cursor.execute(update_query, (nama_template,))
         conn.commit()
 
-        # Mengubah status_job menjadi 2 di database setelah server berhasil membuat template
-        update_query = "UPDATE template SET status_job = 2, tgl_selesai = CURDATE() WHERE nama_template = %s"
-        cursor.execute(update_query, (nama_template,))
+        # Mengubah status_job menjadi 2 dan tgl_selesai menjadi waktu saat ini di database setelah server berhasil membuat template
+        update_query = "UPDATE template SET status_job = 2, tgl_selesai = %s WHERE nama_template = %s"
+        current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        cursor.execute(update_query, (current_time, nama_template))
         conn.commit()
     else:
         print(f"Image creation for {nama_template} - {link_template} failed.")
@@ -55,6 +57,7 @@ for result in results:
 # Tutup koneksi database
 cursor.close()
 conn.close()
+
 
 
 
