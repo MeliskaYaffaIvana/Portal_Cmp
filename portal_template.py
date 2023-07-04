@@ -1,6 +1,7 @@
 import requests
 import mysql.connector
 from datetime import datetime
+import pytz
 
 # Koneksi ke database MySQL
 conn = mysql.connector.connect(
@@ -15,6 +16,9 @@ cursor = conn.cursor()
 query = "SELECT nama_template, link_template,versi FROM template WHERE status_job = '0'"
 cursor.execute(query)
 results = cursor.fetchall()
+
+# Mengatur zona waktu Asia/Jakarta
+timezone = pytz.timezone('Asia/Jakarta')
 
 for result in results:
     nama_template, link_template, versi = result
@@ -41,9 +45,9 @@ for result in results:
         cursor.execute(update_query, (nama_template,))
         conn.commit()
 
-        # Mengubah status_job menjadi 2 dan tgl_selesai menjadi waktu saat ini di database setelah server berhasil membuat template
+        # Mengubah status_job menjadi 2 dan tgl_selesai menjadi waktu saat ini di zona waktu Asia/Jakarta
         update_query = "UPDATE template SET status_job = 2, tgl_selesai = %s WHERE nama_template = %s"
-        current_time = datetime.now('Asia/Jakarta).strftime('%Y-%m-%d %H:%M:%S')
+        current_time = datetime.now(timezone).strftime('%Y-%m-%d %H:%M:%S')
         cursor.execute(update_query, (current_time, nama_template))
         conn.commit()
     else:
@@ -57,7 +61,6 @@ for result in results:
 # Tutup koneksi database
 cursor.close()
 conn.close()
-
 
 
 
