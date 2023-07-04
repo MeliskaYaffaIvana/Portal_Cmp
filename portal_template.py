@@ -1,5 +1,6 @@
 import requests
 import mysql.connector
+import time
 from datetime import datetime, timedelta
 
 # Koneksi ke database MySQL
@@ -74,6 +75,7 @@ for result in results:
 # Tutup koneksi database
 cursor.close()
 conn.close()
+
 
 
 
