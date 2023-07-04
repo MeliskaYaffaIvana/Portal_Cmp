@@ -51,9 +51,12 @@ for result in results:
             status = cursor.fetchone()[0]
             if status == 2:
                 break
+            else:
+                # Tunggu 1 detik sebelum memeriksa status_job lagi
+                time.sleep(1)
 
         # Mengubah status_job menjadi 2 dan tgl_selesai menjadi waktu saat ini di zona waktu Asia/Jakarta
-        current_time = datetime.utcnow() + utc_offset
+        current_time = datetime.now() + utc_offset
         current_time_str = current_time.strftime('%Y-%m-%d %H:%M:%S')
         update_query = "UPDATE template SET status_job = 2, tgl_selesai = %s WHERE nama_template = %s"
         cursor.execute(update_query, (current_time_str, nama_template))
@@ -71,6 +74,7 @@ for result in results:
 # Tutup koneksi database
 cursor.close()
 conn.close()
+
 
 
 # import requests
