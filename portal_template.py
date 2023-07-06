@@ -27,7 +27,7 @@ url = 'http://10.0.0.21:8000/api/create_container/'
 
 # Mengirim data ke server untuk setiap baris hasil query
 for result in results:
-    nama_kontainer, id_template, id_user, nama_template, nim = result
+    nama_kontainer, nama_template, default_dir, nim = result
 
     # Ambil kategori dari tabel kategori berdasarkan ID template
     kategori_query = "SELECT kategori FROM kategori WHERE id_template = %s"
