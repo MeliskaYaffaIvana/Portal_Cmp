@@ -45,8 +45,23 @@ for result in results:
     # Memeriksa respon dari server
     if response.status_code == 200:
         print(f'Data berhasil dikirim ke server: {data}')
+        # Mengubah status_job menjadi 2 dan tgl_selesai menjadi waktu saat ini di zona waktu Asia/Jakarta
+        current_time = datetime.utcnow() + utc_offset
+        current_time_str = current_time.strftime('%Y-%m-%d %H:%M:%S')
+        update_query = "UPDATE container SET status_job = 2, tgl_selesai = %s WHERE nama_kontainer = %s"
+        cursor.execute(update_query, (current_time_str, nama_kontainer))
+        conn.commit()
+
+        # Mengubah atribut bolehkan menjadi 1 jika status_job sudah 2
+        update_query = "UPDATE container SET bolehkan = 1 WHERE status_job = 2"
+        cursor.execute(update_query)
+        conn.commit()
     else:
         print(f'Terjadi kesalahan saat mengirim data ke server: {data}')
+        # Mengubah status_job menjadi 3 di database jika gagal membuat template
+        update_query = "UPDATE container SET status_job = 3 WHERE nama_kontainer = %s"
+        cursor.execute(update_query, (nama_kontainer,))
+        conn.commit()
 
 # Tutup koneksi database
 cursor.close()
