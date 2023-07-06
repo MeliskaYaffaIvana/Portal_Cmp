@@ -66,9 +66,9 @@ from datetime import datetime, timedelta
 #         cursor.execute(update_query, (nama_kontainer,))
 #         conn.commit()
 
-# Tutup koneksi database
-cursor.close()
-conn.close()
+# # Tutup koneksi database
+# cursor.close()
+# conn.close()
 
 # Koneksi ke database MySQL
 conn = mysql.connector.connect(
