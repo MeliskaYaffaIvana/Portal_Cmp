@@ -10,25 +10,50 @@ db = mysql.connector.connect(
     database='repository'
 )
 
-# URL Endpoint API server
-api_url = 'http://api-server/create_container'
+cursor = conn.cursor()
 
-# Permintaan ke API server
-data = {
-    'nama_kontainer': nama_kontainer,
-    'id_template': id_template,
-    'id_user': id_user
-}
-response = requests.post(api_url, data=data)
+# Mendapatkan data dari tabel kontainer dengan melakukan inner join pada tabel template dan user
+query = """
+    SELECT nama_kontainer, kontainer.id_template, kontainer.id_user, template.nama_template, user.nim
+    FROM kontainer
+    INNER JOIN template ON kontainer.id_template = template.id
+    INNER JOIN users ON kontainer.id_user = users.id
+"""
+cursor.execute(query)
+results = cursor.fetchall()
 
-# Mengecek respons dari server
-if response.status_code == 200:
-    print("Container created successfully.")
-else:
-    print("Failed to create container.")
+# URL endpoint server
+url = 'http://10.0.0.21:8000/api/create_container/'
 
-# Menutup koneksi database
-db.close()
+# Mengirim data ke server untuk setiap baris hasil query
+for result in results:
+    nama_kontainer id_template, id_user, nama_template, nim = result
+
+    # Ambil kategori dari tabel kategori berdasarkan ID template
+    kategori_query = "SELECT kategori FROM kategori WHERE id_template = %s"
+    cursor.execute(kategori_query, (id_template,))
+    kategori = cursor.fetchone()[0]
+
+    # Data yang akan dikirim ke server
+    data = {
+        'nama_kontainer':nama_kontainer,
+        'nama_template': nama_template,
+        'nim': nim,
+        'kategori': kategori
+    }
+
+    # Mengirim permintaan POST ke server dengan data
+    response = requests.post(url, json=data)
+
+    # Memeriksa respon dari server
+    if response.status_code == 200:
+        print(f'Data berhasil dikirim ke server: {data}')
+    else:
+        print(f'Terjadi kesalahan saat mengirim data ke server: {data}')
+
+# Tutup koneksi database
+cursor.close()
+conn.close()
 
 # # Koneksi ke database MySQL
 # conn = mysql.connector.connect(
