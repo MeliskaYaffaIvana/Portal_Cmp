@@ -14,10 +14,11 @@ cursor = conn.cursor()
 
 # Mendapatkan data dari tabel kontainer dengan melakukan inner join pada tabel template dan user
 query = """
-    SELECT nama_kontainer, container.id_template, container.id_user, template.nama_template, template.default_dir, users.nim
+    SELECT container.nama_kontainer, container.id_template, container.id_user, template.nama_template, template.default_dir, users.nim, kategori.kategori
     FROM container
     INNER JOIN template ON container.id_template = template.id
     INNER JOIN users ON container.id_user = users.id
+    INNER JOIN kategori ON template.id_kategori =  kategori.id
 """
 cursor.execute(query)
 results = cursor.fetchall()
@@ -27,12 +28,7 @@ url = 'http://10.0.0.21:8000/api/create_container/'
 
 # Mengirim data ke server untuk setiap baris hasil query
 for result in results:
-    nama_kontainer, id_template, id_user, nama_template, default_dir, nim = result
-
-    # Ambil kategori dari tabel kategori berdasarkan ID template
-    kategori_query = "SELECT kategori FROM kategori WHERE id_template = %s"
-    cursor.execute(kategori_query, (id_template,))
-    kategori = cursor.fetchone()[0]
+    nama_kontainer, id_template, id_user, nama_template, default_dir, nim, kategori = result
 
     # Data yang akan dikirim ke server
     data = {
