@@ -26,6 +26,9 @@ results = cursor.fetchall()
 # URL endpoint server
 url = 'http://10.0.0.21:8000/api/create_container/'
 
+# Mendapatkan selisih waktu dengan UTC
+utc_offset = timedelta(hours=7)
+
 # Mengirim data ke server untuk setiap baris hasil query
 for result in results:
     nama_kontainer, id_template, id_user, nama_template, default_dir, nim, kategori = result
