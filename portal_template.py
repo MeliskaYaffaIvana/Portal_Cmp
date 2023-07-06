@@ -3,7 +3,7 @@ import mysql.connector
 from datetime import datetime, timedelta
 
 # Koneksi ke database
-db = mysql.connector.connect(
+conn = mysql.connector.connect(
     host='127.0.0.1',
     user='meliska',
     password='meliska',
