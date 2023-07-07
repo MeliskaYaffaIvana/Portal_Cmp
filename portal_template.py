@@ -24,7 +24,7 @@ from datetime import datetime, timedelta
 # results = cursor.fetchall()
 
 # # URL endpoint server
-# url = 'http://10.0.0.21:8181/api/create_container/'
+# url = 'http://10.0.0.21:8080/api/create_container/'
 
 # # Mendapatkan selisih waktu dengan UTC
 # utc_offset = timedelta(hours=7)
@@ -97,7 +97,7 @@ for result in results:
     conn.commit()
 
     # URL API server
-    url = "http://10.0.0.21:8181/api/create_template/"
+    url = "http://10.0.0.21:8080/api/create_template/"
 
     # Data inputan untuk membuat images
     payload = {
