@@ -19,7 +19,7 @@ query = """
     INNER JOIN template ON container.id_template = template.id
     INNER JOIN users ON container.id_user = users.id
     INNER JOIN kategori ON template.id_kategori =  kategori.id
-    WHERE status_job = 0
+    WHERE container.status_job = 0
 """
 cursor.execute(query)
 results = cursor.fetchall()
