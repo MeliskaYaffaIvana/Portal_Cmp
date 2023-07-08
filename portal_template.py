@@ -28,7 +28,7 @@ for result in results:
     conn.commit()
 
     # URL API server
-    url = "http://10.0.0.21:8181/api/create_template/"
+    url = "http://10.0.0.21:8282/api/create_template/"
 
     # Data inputan untuk membuat images
     payload = {
