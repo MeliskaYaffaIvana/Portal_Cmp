@@ -14,7 +14,7 @@ cursor = conn.cursor()
 
 # Mendapatkan data dari tabel kontainer dengan melakukan inner join pada tabel template dan user
 query = """
-    SELECT container.id, container.id_template, container.id_user, container.port, template.nama_template, template.default_dir, users.nim, kategori.kategori
+    SELECT container.id, container.id_template, container.id_user, container.port_kontainer, template.nama_template, template.default_dir, template.port, users.nim, kategori.kategori
     FROM container
     INNER JOIN template ON container.id_template = template.id
     INNER JOIN users ON container.id_user = users.id
@@ -38,6 +38,7 @@ for result in results:
     data = {
         'id':id,
         'nama_template': nama_template,
+        'port_kontainer':port_kontainer,
         'port':port,
         'default_dir':default_dir,
         'nim': nim,
