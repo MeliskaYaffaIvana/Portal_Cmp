@@ -32,7 +32,7 @@ utc_offset = timedelta(hours=7)
 
 # Mengirim data ke server untuk setiap baris hasil query
 for result in results:
-    id, id_template, id_user, port, nama_template, default_dir, , nim, kategori = result
+    id, id_template, id_user, port_kontainer, nama_template, default_dir, port, nim, kategori = result
 
     # Data yang akan dikirim ke server
     data = {
