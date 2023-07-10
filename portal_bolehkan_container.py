@@ -47,4 +47,4 @@ def send_to_server(id, bolehkan):
 data_kontainer = read_from_database()
 for bolehkan, id in data_kontainer:
     send_to_server(id, bolehkan)
-     time.sleep(2)  # Jeda 2 detik antara pengiriman setiap kontainer
+    time.sleep(2)  # Jeda 2 detik antara pengiriman setiap kontainer
