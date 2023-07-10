@@ -14,7 +14,7 @@ cursor = conn.cursor()
 
 # Mendapatkan data dari tabel kontainer dengan melakukan inner join pada tabel template dan user
 query = """
-    SELECT container.id, container.id_template, container.id_user, template.nama_template, template.default_dir, template.port, users.nim, kategori.kategori
+    SELECT container.id, container.id_template, container.id_user, container.port, template.nama_template, template.default_dir, users.nim, kategori.kategori
     FROM container
     INNER JOIN template ON container.id_template = template.id
     INNER JOIN users ON container.id_user = users.id
@@ -32,7 +32,7 @@ utc_offset = timedelta(hours=7)
 
 # Mengirim data ke server untuk setiap baris hasil query
 for result in results:
-    id, id_template, id_user, nama_template, default_dir, port, nim, kategori = result
+    id, id_template, id_user, port, nama_template, default_dir, , nim, kategori = result
 
     # Data yang akan dikirim ke server
     data = {
