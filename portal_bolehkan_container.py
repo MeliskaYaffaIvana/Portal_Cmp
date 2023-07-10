@@ -24,10 +24,7 @@ def read_from_database():
     conn.close()
 
     # Mengembalikan nilai dari database
-    if result is not None:
-        return result[0]
-    else:
-        return None
+    return results
 
 # Fungsi untuk mengirim nilai bolehkan dan id ke server Django
 def send_to_server(id, bolehkan):
