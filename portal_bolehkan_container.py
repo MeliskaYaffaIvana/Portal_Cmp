@@ -18,7 +18,14 @@ def read_from_database():
     query = "SELECT bolehkan, id FROM container"
     cursor.execute(query)
     results = cursor.fetchall()
-
+    if response.status_code == 200:
+        update_query = "UPDATE container SET status = true, WHERE bolehkan = 1"
+        cursor.execute(update_query)
+        conn.commit()
+    else:
+        update_query = "UPDATE container SET status = false, WHERE bolehkan = 0"
+        cursor.execute(update_query)
+        conn.commit()
     # Menutup koneksi database
     cursor.close()
     conn.close()
