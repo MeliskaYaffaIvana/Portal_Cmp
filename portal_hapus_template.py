@@ -1,7 +1,7 @@
 import requests
 import mysql.connector
 
-url = 'http://10.0.0.21:8080/api/update_template'
+url = 'http://10.0.0.21:8080/api/delete_template'
 
 def send_template_names_to_server():
     # Koneksi ke database
