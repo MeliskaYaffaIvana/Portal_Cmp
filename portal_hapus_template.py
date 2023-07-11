@@ -31,9 +31,9 @@ def send_template_names_to_server():
 
         # Memeriksa kode status respons
         if response.status_code == 200:
-            print(f'Nama _template {template_name} berhasil dikirim ke server')
+            print(f'Nama template {nama_template} berhasil dikirim ke server')
         else:
-            print(f'Gagal mengirim nama _template {nama_template} ke server')
+            print(f'Gagal mengirim nama template {nama_template} ke server')
 
 # Contoh pemanggilan fungsi
 send_template_names_to_server()
