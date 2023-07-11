@@ -2,7 +2,7 @@ import time
 import requests
 import mysql.connector
 
-url = 'http://10.0.0.21:8282/api/update_bolehkan_container/'
+url = 'http://10.0.0.21:8080/api/update_bolehkan_container/'
 # Fungsi untuk membaca nilai dari database berdasarkan ID kontainer
 def read_from_database():
     # Koneksi ke database
