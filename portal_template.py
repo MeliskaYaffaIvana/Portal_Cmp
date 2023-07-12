@@ -59,7 +59,7 @@ for result in results:
         print(f"Image creation for {nama_template} - {link_template} failed.")
 
         # Mengubah status_job menjadi 3 di database jika gagal membuat template
-        update_query = "UPDATE template SET status_job = 3 WHERE nama_template = %s"
+        update_query = "UPDATE template SET status_job = 3, bolehkan = 0 WHERE nama_template = %s"
         cursor.execute(update_query, (nama_template,))
         conn.commit()
 
