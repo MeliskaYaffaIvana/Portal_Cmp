@@ -1,7 +1,7 @@
 import requests
 import mysql.connector
 
-url = 'http://10.0.0.21:8080/api/delete_kontainer/'
+url = 'http://10.0.0.21:8181/api/delete_kontainer/'
 
 def send_kontainer_names_to_server():
     # Koneksi ke database
