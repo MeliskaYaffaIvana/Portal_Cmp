@@ -36,4 +36,4 @@ def send_kontainer_names_to_server():
             print(f'Gagal mengirim nama template {id} ke server')
 
 # Contoh pemanggilan fungsi
-send_template_names_to_server()
+send_kontainer_names_to_server()
