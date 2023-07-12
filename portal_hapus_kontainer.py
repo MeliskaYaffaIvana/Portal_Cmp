@@ -14,7 +14,7 @@ def send_kontainer_names_to_server():
     cursor = conn.cursor()
 
     # Eksekusi query untuk membaca id dari tabel kontainer
-    query = "SELECT id FROM kontainer"
+    query = "SELECT id FROM container"
     cursor.execute(query)
     id_kontainer = cursor.fetchall()
 
