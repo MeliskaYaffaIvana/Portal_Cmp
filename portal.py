@@ -219,7 +219,7 @@ def process_container_updates():
             update_and_save_to_database(id, bolehkan)
             send_to_server(id, bolehkan)
             time.sleep(2)  # Jeda 2 detik antara pengiriman setiap kontainer
-        time.sleep(60)  # Jeda 1 menit
+
 
 def delete_container():
     # URL endpoint server
