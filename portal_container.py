@@ -25,7 +25,7 @@ cursor.execute(query)
 results = cursor.fetchall()
 
 # URL endpoint server
-url = 'http://10.0.0.21:8181/api/create_container/'
+url = 'http://10.0.0.21:8080/api/create_container/'
 
 # Mendapatkan selisih waktu dengan UTC
 utc_offset = timedelta(hours=7)
