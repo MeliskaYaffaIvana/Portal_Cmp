@@ -113,6 +113,9 @@ def process_container_creation():
     cursor.execute(query)
     results = cursor.fetchall()
 
+    # Mendapatkan selisih waktu dengan UTC
+    utc_offset = timedelta(hours=7)
+
     # URL endpoint server
     url = 'http://10.0.0.21:8080/api/create_container/'
 
@@ -137,9 +140,12 @@ def process_container_creation():
         # Memeriksa respon dari server
         if response.status_code == 200:
             print(f'Data berhasil dikirim ke server: {data}')
-            # Mengubah status_job menjadi 2 di database
-            update_query = "UPDATE container SET status_job = 2 WHERE id = %s"
-            cursor.execute(update_query, (id,))
+            
+            # Mengubah status_job menjadi 2 dan tgl_selesai menjadi waktu saat ini di zona waktu Asia/Jakarta
+            current_time = datetime.utcnow() + utc_offset
+            current_time_str = current_time.strftime('%Y-%m-%d %H:%M:%S')
+            update_query = "UPDATE container SET status_job = 2, tgl_selesai = %s WHERE id = %s"
+            cursor.execute(update_query, (current_time_str, id,))
             mydb.commit()
 
             # Mengubah atribut bolehkan menjadi 1 jika status_job sudah 2
@@ -218,7 +224,7 @@ def process_container_updates():
         for bolehkan, id in data_kontainer:
             update_and_save_to_database(id, bolehkan)
             send_to_server(id, bolehkan)
-            time.sleep(2)  # Jeda 2 detik antara pengiriman setiap kontainer
+           
 
 
 def delete_container():
