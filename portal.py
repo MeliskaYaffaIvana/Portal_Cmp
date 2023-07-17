@@ -59,7 +59,7 @@ def process_template_creation():
         mydb.commit()
 
         # URL API server
-        url = "http://10.0.0.21:8282/api/create_template/"
+        url = "http://10.0.0.21:8181/api/create_template/"
 
         # Data inputan untuk membuat images
         payload = {
@@ -117,7 +117,7 @@ def process_container_creation():
     utc_offset = timedelta(hours=7)
 
     # URL endpoint server
-    url = 'http://10.0.0.21:8282/api/create_container/'
+    url = 'http://10.0.0.21:8181/api/create_container/'
 
     # Mengirim data ke server untuk setiap baris hasil query
     for result in results:
@@ -163,7 +163,7 @@ def process_container_creation():
     cursor.close()
 
 def process_container_updates():
-    url = 'http://10.0.0.21:8282/api/update_bolehkan_container/'
+    url = 'http://10.0.0.21:8181/api/update_bolehkan_container/'
 
     # Fungsi untuk membaca nilai dari database berdasarkan ID kontainer
     def read_from_database():
@@ -229,7 +229,7 @@ def process_container_updates():
            
 def delete_container():
     # URL endpoint server
-    url = 'http://10.0.0.21:8282/api/delete_kontainer/'
+    url = 'http://10.0.0.21:8181/api/delete_kontainer/'
   
     # Membuat kursor untuk mengeksekusi perintah SQL
     cursor = mydb.cursor()
