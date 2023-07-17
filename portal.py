@@ -218,15 +218,15 @@ def process_container_updates():
             print('Nilai berhasil dikirim ke server')
         else:
             print('Gagal mengirim nilai ke server')
-
-    while True:
+            
+    def process_updates():
         data_kontainer = read_from_database()
         for bolehkan, id in data_kontainer:
             update_and_save_to_database(id, bolehkan)
             send_to_server(id, bolehkan)
+    # Memulai pertama kali menjalankan process_updates
+    process_updates()
            
-
-
 def delete_container():
     # URL endpoint server
     url = 'http://10.0.0.21:8080/api/delete_kontainer/'
