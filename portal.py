@@ -23,7 +23,7 @@ def send_unix_user_data():
     results = cursor.fetchall()
 
     # Mengirim data ke server menggunakan curl
-    url = 'http://10.0.0.20:8000/api/add_unix_user/'
+    url = 'http://10.0.0.20:8181/api/add_unix_user/'
     for id, nim in results:
         data = f'nim={nim}'
         command = f'curl -X POST --data-urlencode "{data}" {url}'
