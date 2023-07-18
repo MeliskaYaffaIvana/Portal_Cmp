@@ -227,38 +227,38 @@ def process_container_updates():
     # Memulai pertama kali menjalankan process_updates
     process_updates()
            
-# def delete_container():
-#     # URL endpoint server
-#     url = 'http://10.0.0.21:8000/api/delete_kontainer/'
+def delete_container():
+    # URL endpoint server
+    url = 'http://10.0.0.21:8000/api/delete_kontainer/'
   
-#     # Membuat kursor untuk mengeksekusi perintah SQL
-#     cursor = mydb.cursor()
+    # Membuat kursor untuk mengeksekusi perintah SQL
+    cursor = mydb.cursor()
 
-#     # Eksekusi query untuk membaca id dari tabel kontainer
-#     query = "SELECT id FROM container"
-#     cursor.execute(query)
-#     id_kontainer = cursor.fetchall()
+    # Eksekusi query untuk membaca id dari tabel kontainer
+    query = "SELECT id FROM container"
+    cursor.execute(query)
+    id_kontainer = cursor.fetchall()
 
-#     # Menutup kursor
-#     cursor.close()
+    # Menutup kursor
+    cursor.close()
 
-#     # Mengirim id ke server
-#     for id in id_kontainer:
-#         data = {
-#             'id': id
-#         }
-#         response = requests.post(url, json=data)
+    # Mengirim id ke server
+    for id in id_kontainer:
+        data = {
+            'id': id
+        }
+        response = requests.post(url, json=data)
 
-#         # Memeriksa kode status respons
-#         if response.status_code == 200:
-#             print(f'Kontainer {id} berhasil dikirim ke server')
-#         else:
-#             print(f'Gagal mengirim Kontainer {id} ke server')
+        # Memeriksa kode status respons
+        if response.status_code == 200:
+            print(f'Kontainer {id} berhasil dikirim ke server')
+        else:
+            print(f'Gagal mengirim Kontainer {id} ke server')
 
 while True:
     send_unix_user_data()
     process_template_creation()
     process_container_creation()
     process_container_updates()
-    # delete_container()
+    delete_container()
     time.sleep(60)  # Jeda 1 menit
