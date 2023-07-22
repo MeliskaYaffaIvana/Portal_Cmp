@@ -121,7 +121,7 @@ def process_container_creation():
 
     # Mengirim data ke server untuk setiap baris hasil query
     for result in results:
-        id, id_template, id_user, port_kontainer, nama_template, default_dir, port, nim, kategori, env_kontainer, env_template, env_kontainer = result
+        id, id_template, id_user, port_kontainer, nama_template, default_dir, port, nim, kategori, env_template, env_kontainer = result
 
         # Data yang akan dikirim ke server
         data = {
