@@ -126,11 +126,13 @@ def process_container_creation():
 
         # Convert bytes objects to strings in env_template and env_kontainer
         if env_template:
+            env_template = json.loads(env_template)
             for key, value in env_template.items():
                 if isinstance(value, bytes):
                     env_template[key] = value.decode('utf-8')
 
         if env_kontainer:
+            env_kontainer = json.loads(env_kontainer)
             for key, value in env_kontainer.items():
                 if isinstance(value, bytes):
                     env_kontainer[key] = value.decode('utf-8')
