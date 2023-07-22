@@ -1,4 +1,5 @@
 import requests
+import json
 import subprocess
 import mysql.connector
 import shlex
@@ -122,6 +123,17 @@ def process_container_creation():
     # Mengirim data ke server untuk setiap baris hasil query
     for result in results:
         id, id_template, id_user, port_kontainer, nama_template, default_dir, port, nim, kategori, env_template, env_kontainer = result
+
+        # Convert bytes objects to strings in env_template and env_kontainer
+        if env_template:
+            for key, value in env_template.items():
+                if isinstance(value, bytes):
+                    env_template[key] = value.decode('utf-8')
+
+        if env_kontainer:
+            for key, value in env_kontainer.items():
+                if isinstance(value, bytes):
+                    env_kontainer[key] = value.decode('utf-8')
 
         # Data yang akan dikirim ke server
         data = {
