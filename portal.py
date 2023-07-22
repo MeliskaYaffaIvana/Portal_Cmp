@@ -103,7 +103,7 @@ def process_container_creation():
 
     # Mendapatkan data dari tabel kontainer dengan melakukan inner join pada tabel template dan user
     query = """
-        SELECT container.id, container.id_template, container.id_user, container.port_kontainer, template.nama_template, template.default_dir, template.port, users.nim, kategori.kategori
+        SELECT container.id, container.id_template, container.id_user, container.port_kontainer, template.nama_template, template.default_dir, template.port, users.nim, kategori.kategori, template.env_template, container.env_kontainer
         FROM container
         INNER JOIN template ON container.id_template = template.id
         INNER JOIN users ON container.id_user = users.id
@@ -121,7 +121,7 @@ def process_container_creation():
 
     # Mengirim data ke server untuk setiap baris hasil query
     for result in results:
-        id, id_template, id_user, port_kontainer, nama_template, default_dir, port, nim, kategori = result
+        id, id_template, id_user, port_kontainer, nama_template, default_dir, port, nim, kategori, env_kontainer, env_template, env_kontainer = result
 
         # Data yang akan dikirim ke server
         data = {
@@ -131,7 +131,9 @@ def process_container_creation():
             'port': port,
             'default_dir': default_dir,
             'nim': nim,
-            'kategori': kategori
+            'kategori': kategori,
+            'env_template':env_template,
+            'env_kontainer': env_kontainer
         }
 
         # Mengirim permintaan POST ke server dengan data
