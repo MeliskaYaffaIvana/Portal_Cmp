@@ -34,7 +34,7 @@ def send_unix_user_data():
             subprocess.run(command, shell=True, check=True)
             print("Data berhasil dikirim")
             # Jika data berhasil dikirim, update nilai "terdaftar" menjadi 1
-            update_query = f"UPDATE users SET terdaftar = 1 WHERE id = {id}"
+            update_query = f"UPDATE users SET terdaftar = 1 WHERE nim = {nim}"
             cursor.execute(update_query)
             mydb.commit()
         except subprocess.CalledProcessError as e:
