@@ -19,7 +19,7 @@ def send_unix_user_data():
     cursor = mydb.cursor()
 
     # Mendapatkan data NIM dan password dari tabel pengguna
-    query = "SELECT id, nim FROM users"
+    query = "SELECT id, nim FROM users WHERE terdaftar = 0 "
     cursor.execute(query)
     results = cursor.fetchall()
 
@@ -33,6 +33,10 @@ def send_unix_user_data():
         try:
             subprocess.run(command, shell=True, check=True)
             print("Data berhasil dikirim")
+            # Jika data berhasil dikirim, update nilai "terdaftar" menjadi 1
+            update_query = f"UPDATE users SET terdaftar = 1 WHERE id = {id}"
+            cursor.execute(update_query)
+            mydb.commit()
         except subprocess.CalledProcessError as e:
             print(f"Terjadi kesalahan saat mengirim data: {e}")
 
