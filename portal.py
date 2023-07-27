@@ -19,7 +19,7 @@ def send_unix_user_data():
     cursor = mydb.cursor()
 
     # Mendapatkan data NIM dan password dari tabel pengguna
-    query = "SELECT id, nim FROM users WHERE terdaftar = 0 "
+    query = "SELECT id, nim FROM users WHERE terdaftar = '0' "
     cursor.execute(query)
     results = cursor.fetchall()
 
